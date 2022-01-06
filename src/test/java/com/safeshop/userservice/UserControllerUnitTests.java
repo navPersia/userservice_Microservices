@@ -37,9 +37,9 @@ public class UserControllerUnitTests {
         user1.setCreatedAt(null);
         user1.setModifiedAt(null);
 
-        given(userRepository.findById("1")).willReturn(java.util.Optional.of(user1));
+        given(userRepository.findUserByUsername("navid1")).willReturn(user1);
 
-        mockMvc.perform(get("/users/user/{id}", 1))
+        mockMvc.perform(get("/users/user/{username}", "navid1"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("navid")))
